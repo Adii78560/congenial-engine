@@ -80,6 +80,116 @@ public enum GameConstants {
         public static let neonCyan = UIColor(red: 0.0, green: 0.95, blue: 1.0, alpha: 1.0)
         public static let neonPink = UIColor(red: 1.0, green: 0.15, blue: 0.7, alpha: 1.0)
         public static let goldColor = UIColor(red: 1.0, green: 0.84, blue: 0.0, alpha: 1.0)
+        public static let gameCenterCyan = UIColor(red: 0.2, green: 0.9, blue: 1.0, alpha: 1.0)
+        public static let warningRed = UIColor(red: 1.0, green: 0.3, blue: 0.3, alpha: 1.0)
+    }
+    
+    // MARK: - Gameplay Judgments & Toast Notifications
+    public enum Judgments {
+        public static let feverBonus = "FEVER BONUS!"
+        public static let perfect = "PERFECT"
+        public static let great = "GREAT"
+        public static let good = "GOOD"
+        public static let miss = "MISS"
+        public static let loggedOut = "LOGGED OUT"
+        
+        public static func unlockedCharacter(_ name: String) -> String {
+            return "UNLOCKED \(name.uppercased())!"
+        }
+        
+        public static func needMoreCoins(_ count: Int) -> String {
+            return "NEED \(count) MORE COINS!"
+        }
+        
+        public static func welcomePlayer(_ name: String) -> String {
+            return "WELCOME, \(name.uppercased())!"
+        }
+        
+        public static func gameCenterPlayer(_ name: String) -> String {
+            return "GAME CENTER: \(name.uppercased())"
+        }
+    }
+    
+    // MARK: - UI Text & Navigation Labels
+    public enum UIStrings {
+        // App Identity
+        public static let appTitle = "GROOVE GAMES"
+        public static let appSubtitle = "3D DANCE RHYTHM ARCADE"
+        public static let studioName = "Boogie Down Games"
+        public static let studioSubTitle = "Apple Lossless Studio Beatmaps"
+        
+        // Splash & Authentication
+        public static let signInToPlay = "🔒 SIGN IN BELOW TO PLAY"
+        public static let signInPrompt = "⚠️  PLEASE SIGN IN WITH APPLE OR GAME CENTER TO PLAY"
+        public static func tapToEnter(_ name: String) -> String {
+            return "✓ \(name.uppercased()) • TAP ANYWHERE TO ENTER ▶"
+        }
+        
+        // Main Menu
+        public static let nowPlaying = "NOW PLAYING"
+        public static let chooseTrack = "CHOOSE YOUR TRACK"
+        public static let selectDancer = "SELECT YOUR DANCER"
+        public static let dancerSubTitle = "Choose your avatar & preview live groove on stage"
+        public static let howToPlay = "HOW TO PLAY"
+        public static let howToPlaySubTitle = "Follow the beat, tap on time, and build high combo scores"
+        public static let playerProfile = "PLAYER PROFILE"
+        public static let settings = "SETTINGS & PREFERENCES"
+        
+        // Profile & Settings Headers
+        public static let identitySession = "IDENTITY & SESSION"
+        public static let careerPerformance = "CAREER PERFORMANCE"
+        public static let audioHaptics = "AUDIO & HAPTICS"
+        public static let legalAbout = "LEGAL & ACCOUNT"
+        public static let termsOfServiceTitle = "TERMS OF SERVICE"
+        public static let privacyPolicyTitle = "PRIVACY POLICY"
+        
+        // Interactive Buttons & Tags
+        public static let playNowButton = "▶  PLAY GAME"
+        public static let selectTrackButton = "🎵  SONG SELECT"
+        public static func selectDancerButton(_ dancerName: String) -> String {
+            return "💃  SELECT DANCER (\(dancerName))"
+        }
+        public static let profileButton = "👤  PROFILE"
+        public static let settingsButton = "⚙️  SETTINGS"
+        public static let howToPlayButton = "❓  HOW TO PLAY"
+        public static let backButton = "◀  BACK"
+        public static let menuButton = "◀  MENU"
+        public static let startDancingButton = "▶  START DANCING"
+        public static let confirmDancerButton = "✓  CONFIRM DANCER"
+        public static let letsGrooveButton = "▶  LET'S GROOVE"
+        public static let logoutButton = "🚪  SIGN OUT / SWITCH USER"
+        public static let resetSessionButton = "🚪  SIGN OUT / RESET SESSION"
+        public static let termsButton = "📄  TERMS OF SERVICE"
+        public static let privacyButton = "🔒  PRIVACY POLICY"
+        public static let agreeAndReturnButton = "✓  I AGREE & RETURN"
+        public static let understoodAndReturnButton = "✓  UNDERSTOOD & RETURN"
+        public static let closeButton = "✕"
+        
+        public static let selectedTag = "✓ SELECTED"
+        public static let selectTrackTag = "SELECT TRACK"
+        public static let activeDancerTag = "✓ ACTIVE"
+        public static let chooseDancerTag = "CHOOSE"
+        public static func lockedCostTag(_ cost: Int) -> String {
+            return "🔒 \(cost) COINS"
+        }
+        public static func coinsDisplay(_ count: Int) -> String {
+            return "💰 \(count) COINS"
+        }
+        
+        // In-Game HUD & Pause
+        public static let scoreTitle = "SCORE"
+        public static let combo = "COMBO"
+        public static let feverCombo = "🔥 FEVER COMBO"
+        public static let starCombo = "★ COMBO"
+        public static let grooveGauge = "⚡️ GROOVE GAUGE"
+        public static let gamePaused = "GAME PAUSED"
+        public static let resumeButton = "▶  RESUME"
+        public static let restartButton = "🔁  RESTART"
+        public static let mainMenuButton = "🏠  MAIN MENU"
+        public static let playAgainButton = "🔁  PLAY AGAIN"
+        public static let grooveCompleted = "🎉  GROOVE COMPLETED! GREAT PERFORMANCE!"
+        public static let niceTry = "NICE TRY! BETTER LUCK NEXT TIME"
+        public static let finalScore = "FINAL SCORE"
     }
     
     // MARK: - Authentication & Platform IDs

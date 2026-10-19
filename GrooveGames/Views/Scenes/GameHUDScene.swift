@@ -273,7 +273,7 @@ public class GameHUDScene: SKScene {
         if let authBadge = splashLayer.childNode(withName: "splashEnterBadge") {
             authBadge.isHidden = !isLoggedIn
             if let label = authBadge.childNode(withName: "splashEnterLabel") as? SKLabelNode {
-                label.text = "✓ \(profile.playerName.uppercased()) • TAP TO ENTER ▶️"
+                label.text = GameConstants.UIStrings.tapToEnter(profile.playerName)
             }
         }
         if let lockBadge = splashLayer.childNode(withName: "splashLockBadge") {
@@ -374,7 +374,7 @@ public class GameHUDScene: SKScene {
         }
         
         // Title: GROOVE GAMES
-        let logoTitle = SKLabelNode(text: "GROOVE GAMES")
+        let logoTitle = SKLabelNode(text: GameConstants.UIStrings.appTitle)
         logoTitle.fontName = AppleDesign.heavyFont(size: 24)
         logoTitle.fontSize = 24
         logoTitle.fontColor = AppleDesign.label
@@ -382,7 +382,7 @@ public class GameHUDScene: SKScene {
         heroCard.addChild(logoTitle)
         
         // Subtitle: 3D Dance Rhythm Arcade
-        let logoSubtitle = SKLabelNode(text: "3D DANCE RHYTHM ARCADE")
+        let logoSubtitle = SKLabelNode(text: GameConstants.UIStrings.appSubtitle)
         logoSubtitle.fontName = AppleDesign.semiboldFont(size: 10.5)
         logoSubtitle.fontSize = 10.5
         logoSubtitle.fontColor = AppleDesign.cyan
@@ -390,7 +390,7 @@ public class GameHUDScene: SKScene {
         heroCard.addChild(logoSubtitle)
         
         // Studio byline
-        let studioLabel = SKLabelNode(text: "Boogie Down Games")
+        let studioLabel = SKLabelNode(text: GameConstants.UIStrings.studioName)
         studioLabel.fontName = AppleDesign.mediumFont(size: 9.5)
         studioLabel.fontSize = 9.5
         studioLabel.fontColor = AppleDesign.secondaryLabel
@@ -413,7 +413,7 @@ public class GameHUDScene: SKScene {
         authBadge.isHidden = !isLoggedIn
         splashLayer.addChild(authBadge)
         
-        let authText = SKLabelNode(text: "✓ \(profile.playerName.uppercased()) • TAP ANYWHERE TO ENTER ▶")
+        let authText = SKLabelNode(text: GameConstants.UIStrings.tapToEnter(profile.playerName))
         authText.name = "splashEnterLabel"
         authText.fontName = AppleDesign.boldFont(size: 11.5)
         authText.fontSize = 11.5
@@ -438,7 +438,7 @@ public class GameHUDScene: SKScene {
         promptBadge.isHidden = isLoggedIn
         splashLayer.addChild(promptBadge)
         
-        let promptText = SKLabelNode(text: "🔒 SIGN IN BELOW TO PLAY")
+        let promptText = SKLabelNode(text: GameConstants.UIStrings.signInToPlay)
         promptText.name = "splashLockLabel"
         promptText.fontName = AppleDesign.semiboldFont(size: 11)
         promptText.fontSize = 11
@@ -473,7 +473,7 @@ public class GameHUDScene: SKScene {
         toast.lineWidth = 1.0
         toast.zPosition = 100
         
-        let label = SKLabelNode(text: "⚠️  PLEASE SIGN IN WITH APPLE OR GAME CENTER TO PLAY")
+        let label = SKLabelNode(text: GameConstants.UIStrings.signInPrompt)
         label.fontName = AppleDesign.boldFont(size: 11)
         label.fontSize = 11
         label.fontColor = AppleDesign.label
@@ -511,7 +511,7 @@ public class GameHUDScene: SKScene {
         let topBarY = size.height - 38
         
         // Title (Left)
-        let titleLabel = SKLabelNode(text: "GROOVE GAMES")
+        let titleLabel = SKLabelNode(text: GameConstants.UIStrings.appTitle)
         titleLabel.fontName = AppleDesign.heavyFont(size: 24)
         titleLabel.fontSize = 24
         titleLabel.fontColor = AppleDesign.label
@@ -553,7 +553,7 @@ public class GameHUDScene: SKScene {
         songCard.lineWidth = 1.0
         mainMenuLayer.addChild(songCard)
         
-        let cardHeader = SKLabelNode(text: "NOW PLAYING")
+        let cardHeader = SKLabelNode(text: GameConstants.UIStrings.nowPlaying)
         cardHeader.fontName = AppleDesign.boldFont(size: 10)
         cardHeader.fontSize = 10
         cardHeader.fontColor = AppleDesign.secondaryLabel
@@ -618,7 +618,7 @@ public class GameHUDScene: SKScene {
         // 1. Primary PLAY GAME Button (Apple Cyan Vibrant Capsule)
         let playBtn = buildButton(
             name: "menuPlayBtn",
-            text: "▶  PLAY GAME",
+            text: GameConstants.UIStrings.playNowButton,
             size: CGSize(width: btnW, height: 42),
             fillColor: AppleDesign.cyan,
             textColor: UIColor(white: 0.05, alpha: 1.0),
@@ -630,7 +630,7 @@ public class GameHUDScene: SKScene {
         // 2. Song Select Button
         let songBtn = buildButton(
             name: "menuSongBtn",
-            text: "🎵  SONG SELECT",
+            text: GameConstants.UIStrings.selectTrackButton,
             size: CGSize(width: btnW, height: 35),
             fillColor: AppleDesign.glassCard,
             textColor: AppleDesign.label,
@@ -642,7 +642,7 @@ public class GameHUDScene: SKScene {
         // 3. Dancer Select Button
         let charBtn = buildButton(
             name: "menuCharBtn",
-            text: "💃  SELECT DANCER (\(profile.currentCharacter.name))",
+            text: GameConstants.UIStrings.selectDancerButton(profile.currentCharacter.name),
             size: CGSize(width: btnW, height: 35),
             fillColor: AppleDesign.glassCard,
             textColor: AppleDesign.label,
@@ -658,7 +658,7 @@ public class GameHUDScene: SKScene {
         
         let profileBtn = buildButton(
             name: "menuProfileBtn",
-            text: "👤  PROFILE",
+            text: GameConstants.UIStrings.profileButton,
             size: CGSize(width: halfW, height: 35),
             fillColor: AppleDesign.glassCard,
             textColor: AppleDesign.label,
@@ -669,7 +669,7 @@ public class GameHUDScene: SKScene {
         
         let settingsBtn = buildButton(
             name: "menuSettingsBtn",
-            text: "⚙️  SETTINGS",
+            text: GameConstants.UIStrings.settingsButton,
             size: CGSize(width: halfW, height: 35),
             fillColor: AppleDesign.glassCard,
             textColor: AppleDesign.label,
@@ -692,7 +692,7 @@ public class GameHUDScene: SKScene {
         
         let tutBtn = buildButton(
             name: "menuTutBtn",
-            text: "❓  HOW TO PLAY",
+            text: GameConstants.UIStrings.howToPlayButton,
             size: CGSize(width: halfW, height: 35),
             fillColor: AppleDesign.glassCard,
             textColor: AppleDesign.secondaryLabel,
@@ -718,14 +718,14 @@ public class GameHUDScene: SKScene {
         songSelectLayer.addChild(bg)
         
         // 2. Header
-        let titleLabel = SKLabelNode(text: "CHOOSE YOUR TRACK")
+        let titleLabel = SKLabelNode(text: GameConstants.UIStrings.chooseTrack)
         titleLabel.fontName = AppleDesign.heavyFont(size: 22)
         titleLabel.fontSize = 22
         titleLabel.fontColor = AppleDesign.label
         titleLabel.position = CGPoint(x: center.x, y: size.height - 38)
         songSelectLayer.addChild(titleLabel)
         
-        let subTitle = SKLabelNode(text: "Apple Lossless Studio Beatmaps")
+        let subTitle = SKLabelNode(text: GameConstants.UIStrings.studioSubTitle)
         subTitle.fontName = AppleDesign.mediumFont(size: 11)
         subTitle.fontSize = 11
         subTitle.fontColor = AppleDesign.secondaryLabel
@@ -793,7 +793,7 @@ public class GameHUDScene: SKScene {
             tagPill.position = CGPoint(x: 0, y: -cardH / 2 + 24)
             card.addChild(tagPill)
             
-            let tagText = isSelected ? "✓ SELECTED" : "SELECT TRACK"
+            let tagText = isSelected ? GameConstants.UIStrings.selectedTag : GameConstants.UIStrings.selectTrackTag
             let tag = SKLabelNode(text: tagText)
             tag.name = "songCard_\(i)"
             tag.fontName = AppleDesign.boldFont(size: 10)
@@ -806,7 +806,7 @@ public class GameHUDScene: SKScene {
         // Bottom Action Buttons
         let backBtn = buildButton(
             name: "songBackBtn",
-            text: "◀  BACK",
+            text: GameConstants.UIStrings.backButton,
             size: CGSize(width: 130, height: 38),
             fillColor: AppleDesign.glassCard,
             textColor: AppleDesign.label,
@@ -817,7 +817,7 @@ public class GameHUDScene: SKScene {
         
         let confirmBtn = buildButton(
             name: "songConfirmBtn",
-            text: "▶  START DANCING",
+            text: GameConstants.UIStrings.startDancingButton,
             size: CGSize(width: 210, height: 38),
             fillColor: AppleDesign.cyan,
             textColor: UIColor(white: 0.05, alpha: 1.0),
@@ -843,14 +843,14 @@ public class GameHUDScene: SKScene {
         characterSelectLayer.addChild(bg)
         
         // Title Bar
-        let titleLabel = SKLabelNode(text: "SELECT YOUR DANCER")
+        let titleLabel = SKLabelNode(text: GameConstants.UIStrings.selectDancer)
         titleLabel.fontName = AppleDesign.heavyFont(size: 22)
         titleLabel.fontSize = 22
         titleLabel.fontColor = AppleDesign.label
         titleLabel.position = CGPoint(x: center.x, y: size.height - 38)
         characterSelectLayer.addChild(titleLabel)
         
-        let subTitle = SKLabelNode(text: "Choose your avatar & preview live groove on stage")
+        let subTitle = SKLabelNode(text: GameConstants.UIStrings.dancerSubTitle)
         subTitle.fontName = AppleDesign.mediumFont(size: 11)
         subTitle.fontSize = 11
         subTitle.fontColor = AppleDesign.secondaryLabel
@@ -866,7 +866,7 @@ public class GameHUDScene: SKScene {
         coinPill.position = CGPoint(x: size.width - 95, y: size.height - 35)
         characterSelectLayer.addChild(coinPill)
         
-        let coinText = SKLabelNode(text: "💰 \(profile.coinsTotal) COINS")
+        let coinText = SKLabelNode(text: GameConstants.UIStrings.coinsDisplay(profile.coinsTotal))
         coinText.fontName = AppleDesign.boldFont(size: 11)
         coinText.fontSize = 11
         coinText.fontColor = AppleDesign.gold
@@ -939,13 +939,13 @@ public class GameHUDScene: SKScene {
             let tagText: String
             let tagColor: UIColor
             if isSelected {
-                tagText = "✓ ACTIVE"
+                tagText = GameConstants.UIStrings.activeDancerTag
                 tagColor = AppleDesign.green
             } else if isUnlocked {
-                tagText = "CHOOSE"
+                tagText = GameConstants.UIStrings.chooseDancerTag
                 tagColor = AppleDesign.cyan
             } else {
-                tagText = "🔒 \(char.unlockCost) COINS"
+                tagText = GameConstants.UIStrings.lockedCostTag(char.unlockCost)
                 tagColor = (profile.coinsTotal >= char.unlockCost) ? AppleDesign.gold : AppleDesign.red
             }
             
@@ -961,7 +961,7 @@ public class GameHUDScene: SKScene {
         // Bottom Action Buttons
         let backBtn = buildButton(
             name: "charBackBtn",
-            text: "◀  BACK",
+            text: GameConstants.UIStrings.backButton,
             size: CGSize(width: 140, height: 38),
             fillColor: AppleDesign.glassCard,
             textColor: AppleDesign.label,
@@ -972,7 +972,7 @@ public class GameHUDScene: SKScene {
         
         let confirmBtn = buildButton(
             name: "charConfirmBtn",
-            text: "✓  CONFIRM DANCER",
+            text: GameConstants.UIStrings.confirmDancerButton,
             size: CGSize(width: 190, height: 38),
             fillColor: AppleDesign.cyan,
             textColor: UIColor(white: 0.05, alpha: 1.0),
@@ -995,14 +995,14 @@ public class GameHUDScene: SKScene {
         bg.strokeColor = .clear
         tutorialLayer.addChild(bg)
         
-        let titleLabel = SKLabelNode(text: "HOW TO PLAY")
+        let titleLabel = SKLabelNode(text: GameConstants.UIStrings.howToPlay)
         titleLabel.fontName = AppleDesign.heavyFont(size: 22)
         titleLabel.fontSize = 22
         titleLabel.fontColor = AppleDesign.label
         titleLabel.position = CGPoint(x: center.x, y: size.height - 38)
         tutorialLayer.addChild(titleLabel)
         
-        let subTitle = SKLabelNode(text: "Follow the beat, tap on time, and build high combo scores")
+        let subTitle = SKLabelNode(text: GameConstants.UIStrings.howToPlaySubTitle)
         subTitle.fontName = AppleDesign.mediumFont(size: 11)
         subTitle.fontSize = 11
         subTitle.fontColor = AppleDesign.secondaryLabel
@@ -1056,7 +1056,7 @@ public class GameHUDScene: SKScene {
         
         let gotItBtn = buildButton(
             name: "tutGotItBtn",
-            text: "▶  LET'S GROOVE",
+            text: GameConstants.UIStrings.letsGrooveButton,
             size: CGSize(width: 210, height: 40),
             fillColor: AppleDesign.cyan,
             textColor: UIColor(white: 0.05, alpha: 1.0),
@@ -1082,7 +1082,7 @@ public class GameHUDScene: SKScene {
         profileLayer.addChild(bg)
         
         // 2. Top Header Bar
-        let titleLabel = SKLabelNode(text: "PLAYER PROFILE")
+        let titleLabel = SKLabelNode(text: GameConstants.UIStrings.playerProfile)
         titleLabel.fontName = AppleDesign.heavyFont(size: 22)
         titleLabel.fontSize = 22
         titleLabel.fontColor = AppleDesign.label
@@ -1091,7 +1091,7 @@ public class GameHUDScene: SKScene {
         
         let backBtn = buildButton(
             name: "profileBackBtn",
-            text: "◀  MENU",
+            text: GameConstants.UIStrings.menuButton,
             size: CGSize(width: 95, height: 34),
             fillColor: AppleDesign.glassCard,
             textColor: AppleDesign.label,
@@ -1102,7 +1102,7 @@ public class GameHUDScene: SKScene {
         
         let settingsBtn = buildButton(
             name: "profileSettingsBtn",
-            text: "⚙️  SETTINGS",
+            text: GameConstants.UIStrings.settingsButton,
             size: CGSize(width: 120, height: 34),
             fillColor: AppleDesign.glassCard,
             textColor: AppleDesign.label,
@@ -1126,7 +1126,7 @@ public class GameHUDScene: SKScene {
         leftCard.lineWidth = 1.0
         profileLayer.addChild(leftCard)
         
-        let idHeader = SKLabelNode(text: "IDENTITY & SESSION")
+        let idHeader = SKLabelNode(text: GameConstants.UIStrings.identitySession)
         idHeader.fontName = AppleDesign.boldFont(size: 10)
         idHeader.fontSize = 10
         idHeader.fontColor = AppleDesign.secondaryLabel
@@ -1180,7 +1180,7 @@ public class GameHUDScene: SKScene {
         // Logout / Switch User Button (Destructive Apple Style)
         let logoutBtn = buildButton(
             name: "profileLogoutBtn",
-            text: "🚪  SIGN OUT / SWITCH USER",
+            text: GameConstants.UIStrings.logoutButton,
             size: CGSize(width: cardW - 40, height: 34),
             fillColor: UIColor(red: 0.35, green: 0.08, blue: 0.10, alpha: 0.9),
             textColor: AppleDesign.red,
@@ -1197,7 +1197,7 @@ public class GameHUDScene: SKScene {
         rightCard.lineWidth = 1.0
         profileLayer.addChild(rightCard)
         
-        let statsHeader = SKLabelNode(text: "CAREER PERFORMANCE")
+        let statsHeader = SKLabelNode(text: GameConstants.UIStrings.careerPerformance)
         statsHeader.fontName = AppleDesign.boldFont(size: 10)
         statsHeader.fontSize = 10
         statsHeader.fontColor = AppleDesign.secondaryLabel
@@ -1272,7 +1272,7 @@ public class GameHUDScene: SKScene {
         settingsLayer.addChild(bg)
         
         // 2. Top Header
-        let titleLabel = SKLabelNode(text: "SETTINGS & PREFERENCES")
+        let titleLabel = SKLabelNode(text: GameConstants.UIStrings.settings)
         titleLabel.fontName = AppleDesign.heavyFont(size: 22)
         titleLabel.fontSize = 22
         titleLabel.fontColor = AppleDesign.label
@@ -1281,7 +1281,7 @@ public class GameHUDScene: SKScene {
         
         let backBtn = buildButton(
             name: "settingsBackBtn",
-            text: "◀  MENU",
+            text: GameConstants.UIStrings.menuButton,
             size: CGSize(width: 95, height: 34),
             fillColor: AppleDesign.glassCard,
             textColor: AppleDesign.label,
@@ -1309,7 +1309,7 @@ public class GameHUDScene: SKScene {
         leftCard.lineWidth = 1.0
         settingsLayer.addChild(leftCard)
         
-        let audioHeader = SKLabelNode(text: "AUDIO & HAPTICS")
+        let audioHeader = SKLabelNode(text: GameConstants.UIStrings.audioHaptics)
         audioHeader.fontName = AppleDesign.boldFont(size: 10)
         audioHeader.fontSize = 10
         audioHeader.fontColor = AppleDesign.secondaryLabel
@@ -1378,7 +1378,7 @@ public class GameHUDScene: SKScene {
         rightCard.lineWidth = 1.0
         settingsLayer.addChild(rightCard)
         
-        let legalHeader = SKLabelNode(text: "LEGAL & ACCOUNT")
+        let legalHeader = SKLabelNode(text: GameConstants.UIStrings.legalAbout)
         legalHeader.fontName = AppleDesign.boldFont(size: 10)
         legalHeader.fontSize = 10
         legalHeader.fontColor = AppleDesign.secondaryLabel
@@ -1388,7 +1388,7 @@ public class GameHUDScene: SKScene {
         // 1. Terms of Service Button
         let termsBtn = buildButton(
             name: "settingsTermsBtn",
-            text: "📄  TERMS OF SERVICE",
+            text: GameConstants.UIStrings.termsButton,
             size: CGSize(width: btnInnerW, height: btnInnerH),
             fillColor: UIColor(white: 0.14, alpha: 0.7),
             textColor: AppleDesign.label,
@@ -1400,7 +1400,7 @@ public class GameHUDScene: SKScene {
         // 2. Privacy Policy Button
         let privacyBtn = buildButton(
             name: "settingsPrivacyBtn",
-            text: "🔒  PRIVACY POLICY",
+            text: GameConstants.UIStrings.privacyButton,
             size: CGSize(width: btnInnerW, height: btnInnerH),
             fillColor: UIColor(white: 0.14, alpha: 0.7),
             textColor: AppleDesign.label,
@@ -1412,7 +1412,7 @@ public class GameHUDScene: SKScene {
         // 3. Logout / Reset Button
         let logoutBtn = buildButton(
             name: "settingsLogoutBtn",
-            text: "🚪  SIGN OUT / RESET SESSION",
+            text: GameConstants.UIStrings.resetSessionButton,
             size: CGSize(width: btnInnerW, height: btnInnerH),
             fillColor: UIColor(red: 0.35, green: 0.08, blue: 0.10, alpha: 0.9),
             textColor: AppleDesign.red,
@@ -1462,7 +1462,7 @@ public class GameHUDScene: SKScene {
         termsLayer.addChild(modal)
         
         // Header
-        let titleLabel = SKLabelNode(text: "TERMS OF SERVICE")
+        let titleLabel = SKLabelNode(text: GameConstants.UIStrings.termsOfServiceTitle)
         titleLabel.fontName = AppleDesign.heavyFont(size: 18)
         titleLabel.fontSize = 18
         titleLabel.fontColor = AppleDesign.cyan
@@ -1471,7 +1471,7 @@ public class GameHUDScene: SKScene {
         
         let closeTopBtn = buildButton(
             name: "termsCloseBtn",
-            text: "✕",
+            text: GameConstants.UIStrings.closeButton,
             size: CGSize(width: 32, height: 32),
             fillColor: AppleDesign.glassCard,
             textColor: AppleDesign.label,
@@ -1516,7 +1516,7 @@ public class GameHUDScene: SKScene {
         
         let acceptBtn = buildButton(
             name: "termsCloseBtn",
-            text: "✓  I AGREE & RETURN",
+            text: GameConstants.UIStrings.agreeAndReturnButton,
             size: CGSize(width: 220, height: 36),
             fillColor: AppleDesign.cyan,
             textColor: UIColor(white: 0.05, alpha: 1.0),
@@ -1551,7 +1551,7 @@ public class GameHUDScene: SKScene {
         privacyLayer.addChild(modal)
         
         // Header
-        let titleLabel = SKLabelNode(text: "PRIVACY POLICY")
+        let titleLabel = SKLabelNode(text: GameConstants.UIStrings.privacyPolicyTitle)
         titleLabel.fontName = AppleDesign.heavyFont(size: 18)
         titleLabel.fontSize = 18
         titleLabel.fontColor = AppleDesign.green
@@ -1560,7 +1560,7 @@ public class GameHUDScene: SKScene {
         
         let closeTopBtn = buildButton(
             name: "privacyCloseBtn",
-            text: "✕",
+            text: GameConstants.UIStrings.closeButton,
             size: CGSize(width: 32, height: 32),
             fillColor: AppleDesign.glassCard,
             textColor: AppleDesign.label,
@@ -1605,7 +1605,7 @@ public class GameHUDScene: SKScene {
         
         let acceptBtn = buildButton(
             name: "privacyCloseBtn",
-            text: "✓  UNDERSTOOD & RETURN",
+            text: GameConstants.UIStrings.understoodAndReturnButton,
             size: CGSize(width: 230, height: 36),
             fillColor: AppleDesign.green,
             textColor: UIColor(white: 0.05, alpha: 1.0),
@@ -1619,7 +1619,7 @@ public class GameHUDScene: SKScene {
     
     private func setupGameplayHUD() {
         // Top Left: Score
-        let scoreTitle = SKLabelNode(text: "SCORE")
+        let scoreTitle = SKLabelNode(text: GameConstants.UIStrings.scoreTitle)
         scoreTitle.fontName = AppleDesign.boldFont(size: 9)
         scoreTitle.fontSize = 9
         scoreTitle.fontColor = AppleDesign.secondaryLabel
@@ -1660,7 +1660,7 @@ public class GameHUDScene: SKScene {
         gameplayLayer.addChild(songProgressFill)
         
         // Top Right: Combo & Counters
-        comboLabel.text = "COMBO"
+        comboLabel.text = GameConstants.UIStrings.combo
         comboLabel.fontName = AppleDesign.boldFont(size: 8.5)
         comboLabel.fontSize = 8.5
         comboLabel.fontColor = AppleDesign.gold
@@ -1706,7 +1706,7 @@ public class GameHUDScene: SKScene {
         pauseBtn.addChild(pauseIcon)
         
         // Bottom: Groove Energy / Fever Meter
-        energyTitleLabel.text = "⚡️ GROOVE GAUGE"
+        energyTitleLabel.text = GameConstants.UIStrings.grooveGauge
         energyTitleLabel.fontName = AppleDesign.boldFont(size: 9.5)
         energyTitleLabel.fontSize = 9.5
         energyTitleLabel.fontColor = AppleDesign.pink
@@ -1782,7 +1782,7 @@ public class GameHUDScene: SKScene {
         card.lineWidth = 1.0
         pauseLayer.addChild(card)
         
-        let title = SKLabelNode(text: "GAME PAUSED")
+        let title = SKLabelNode(text: GameConstants.UIStrings.gamePaused)
         title.fontName = AppleDesign.heavyFont(size: 20)
         title.fontSize = 20
         title.fontColor = AppleDesign.label
@@ -1791,7 +1791,7 @@ public class GameHUDScene: SKScene {
         
         let resumeBtn = buildButton(
             name: "pauseResumeBtn",
-            text: "▶  RESUME",
+            text: GameConstants.UIStrings.resumeButton,
             size: CGSize(width: 220, height: 38),
             fillColor: AppleDesign.cyan,
             textColor: UIColor(white: 0.05, alpha: 1.0),
@@ -1802,7 +1802,7 @@ public class GameHUDScene: SKScene {
         
         let restartBtn = buildButton(
             name: "pauseRestartBtn",
-            text: "🔁  RESTART",
+            text: GameConstants.UIStrings.restartButton,
             size: CGSize(width: 220, height: 36),
             fillColor: AppleDesign.glassCard,
             textColor: AppleDesign.label,
@@ -1813,7 +1813,7 @@ public class GameHUDScene: SKScene {
         
         let menuBtn = buildButton(
             name: "pauseMenuBtn",
-            text: "🏠  MAIN MENU",
+            text: GameConstants.UIStrings.mainMenuButton,
             size: CGSize(width: 220, height: 36),
             fillColor: AppleDesign.glassCard,
             textColor: AppleDesign.label,
@@ -1851,7 +1851,7 @@ public class GameHUDScene: SKScene {
         resultsLayer.addChild(card)
         
         // Header
-        let title = SKLabelNode(text: isWon ? "🎉  GROOVE COMPLETED! GREAT PERFORMANCE!" : "NICE TRY! BETTER LUCK NEXT TIME")
+        let title = SKLabelNode(text: isWon ? GameConstants.UIStrings.grooveCompleted : GameConstants.UIStrings.niceTry)
         title.fontName = AppleDesign.heavyFont(size: 16)
         title.fontSize = 16
         title.fontColor = isWon ? AppleDesign.gold : AppleDesign.label
@@ -1885,7 +1885,7 @@ public class GameHUDScene: SKScene {
         scoreLabelResult.position = CGPoint(x: 40, y: 38)
         card.addChild(scoreLabelResult)
         
-        let scoreSub = SKLabelNode(text: "FINAL SCORE  •  \(accuracy)% ACCURACY")
+        let scoreSub = SKLabelNode(text: "\(GameConstants.UIStrings.finalScore)  •  \(accuracy)% ACCURACY")
         scoreSub.fontName = AppleDesign.boldFont(size: 11)
         scoreSub.fontSize = 11
         scoreSub.fontColor = AppleDesign.cyan
@@ -1903,7 +1903,7 @@ public class GameHUDScene: SKScene {
         // Bottom Action Buttons
         let playAgainBtn = buildButton(
             name: "resultPlayAgainBtn",
-            text: "🔁  PLAY AGAIN",
+            text: GameConstants.UIStrings.playAgainButton,
             size: CGSize(width: 170, height: 38),
             fillColor: AppleDesign.cyan,
             textColor: UIColor(white: 0.05, alpha: 1.0),
@@ -1914,7 +1914,7 @@ public class GameHUDScene: SKScene {
         
         let mainMenuBtn = buildButton(
             name: "resultMainMenuBtn",
-            text: "🏠  MAIN MENU",
+            text: GameConstants.UIStrings.mainMenuButton,
             size: CGSize(width: 170, height: 38),
             fillColor: AppleDesign.glassCard,
             textColor: AppleDesign.label,
@@ -1953,20 +1953,20 @@ public class GameHUDScene: SKScene {
         if combo > 0 {
             if combo >= 20 {
                 comboCountLabel.fontColor = UIColor(red: 1.0, green: 0.25, blue: 0.9, alpha: 1.0)
-                comboLabel.text = "🔥 FEVER COMBO"
+                comboLabel.text = GameConstants.UIStrings.feverCombo
             } else if combo >= 10 {
                 comboCountLabel.fontColor = UIColor(red: 1.0, green: 0.8, blue: 0.1, alpha: 1.0)
-                comboLabel.text = "★ COMBO"
+                comboLabel.text = GameConstants.UIStrings.starCombo
             } else {
                 comboCountLabel.fontColor = UIColor(red: 0.3, green: 0.85, blue: 1.0, alpha: 1.0)
-                comboLabel.text = "COMBO"
+                comboLabel.text = GameConstants.UIStrings.combo
             }
             comboCountLabel.run(SKAction.sequence([
                 SKAction.scale(to: 1.3, duration: 0.06),
                 SKAction.scale(to: 1.0, duration: 0.1)
             ]))
         } else {
-            comboLabel.text = "COMBO"
+            comboLabel.text = GameConstants.UIStrings.combo
             comboCountLabel.fontColor = UIColor(white: 0.6, alpha: 0.8)
         }
     }
@@ -2117,7 +2117,7 @@ public class GameHUDScene: SKScene {
                 return
             case "profileLogoutBtn":
                 PlayerProfile.shared.logout()
-                showJudgment(text: "LOGGED OUT", scoreEarned: 0, color: UIColor(red: 1.0, green: 0.3, blue: 0.3, alpha: 1.0))
+                showJudgment(text: GameConstants.Judgments.loggedOut, scoreEarned: 0, color: GameConstants.Palette.warningRed)
                 setScreenState(.splash)
                 return
                 
@@ -2133,7 +2133,7 @@ public class GameHUDScene: SKScene {
             case "settingsSFXBtn":
                 _ = PlayerProfile.shared.cycleSFXVolume()
                 DanceGameManager.shared.applyAudioSettings()
-                DanceGameManager.shared.playSFX("GoodNote1")
+                DanceGameManager.shared.playSFX(GameConstants.Audio.sfxGood1)
                 rebuildCurrentScreen()
                 return
             case "settingsHapticsBtn":
@@ -2156,7 +2156,7 @@ public class GameHUDScene: SKScene {
                 return
             case "settingsLogoutBtn":
                 PlayerProfile.shared.logout()
-                showJudgment(text: "LOGGED OUT", scoreEarned: 0, color: UIColor(red: 1.0, green: 0.3, blue: 0.3, alpha: 1.0))
+                showJudgment(text: GameConstants.Judgments.loggedOut, scoreEarned: 0, color: GameConstants.Palette.warningRed)
                 setScreenState(.splash)
                 return
                 
@@ -2195,11 +2195,11 @@ public class GameHUDScene: SKScene {
                         let char = profile.availableCharacters[idx]
                         if profile.unlockCharacter(at: idx) {
                             hudDelegate?.hudDidSelectCharacter(index: idx)
-                            showJudgment(text: "UNLOCKED \(char.name.uppercased())!", scoreEarned: 0, color: UIColor(red: 0.2, green: 1.0, blue: 0.5, alpha: 1.0))
+                            showJudgment(text: GameConstants.Judgments.unlockedCharacter(char.name), scoreEarned: 0, color: GameConstants.Palette.successGreenColor)
                             rebuildCurrentScreen()
                         } else {
                             let needed = char.unlockCost - profile.coinsTotal
-                            showJudgment(text: "NEED \(needed) MORE COINS!", scoreEarned: 0, color: UIColor(red: 1.0, green: 0.4, blue: 0.3, alpha: 1.0))
+                            showJudgment(text: GameConstants.Judgments.needMoreCoins(needed), scoreEarned: 0, color: GameConstants.Palette.warningRed)
                         }
                     }
                 }

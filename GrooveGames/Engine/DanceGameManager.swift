@@ -983,32 +983,32 @@ public class DanceGameManager: NSObject, AVAudioPlayerDelegate, GameHUDSceneDele
         
         var scoreEarned: Int = 0
         var bonusEarned: Float = 0.0
-        var sfxName: String = "GoodNote1"
-        var judgmentText: String = "GOOD"
-        var judgmentColor: UIColor = NoteNode.lowScoreColor
+        var sfxName: String = GameConstants.Audio.sfxGood1
+        var judgmentText: String = GameConstants.Judgments.good
+        var judgmentColor: UIColor = GameConstants.Palette.lowScoreColor
         
         switch state {
         case .lowScore:
             scoreEarned = lowScoreEarned // 10
-            bonusEarned = 0.025
-            sfxName = "GoodNote1"
-            judgmentText = "GOOD"
-            judgmentColor = NoteNode.lowScoreColor
+            bonusEarned = GameConstants.Scoring.lowScoreBonusEnergy
+            sfxName = GameConstants.Audio.sfxGood1
+            judgmentText = GameConstants.Judgments.good
+            judgmentColor = GameConstants.Palette.lowScoreColor
             
         case .midScore:
             scoreEarned = midScoreEarned // 25
-            bonusEarned = 0.05
-            sfxName = "GoodNote2"
-            judgmentText = "GREAT"
-            judgmentColor = NoteNode.midScoreColor
+            bonusEarned = GameConstants.Scoring.midScoreBonusEnergy
+            sfxName = GameConstants.Audio.sfxGood2
+            judgmentText = GameConstants.Judgments.great
+            judgmentColor = GameConstants.Palette.midScoreColor
             
         case .highScore:
             scoreEarned = highScoreEarned // 50
-            bonusEarned = 0.075
+            bonusEarned = GameConstants.Scoring.highScoreBonusEnergy
             // If in high fever/combo, play GoodNote4 for extra sonic punch
-            sfxName = (currentCombo >= 15) ? "GoodNote4" : "GoodNote3"
-            judgmentText = "PERFECT"
-            judgmentColor = NoteNode.highScoreColor
+            sfxName = (currentCombo >= 15) ? GameConstants.Audio.sfxGood4 : GameConstants.Audio.sfxGood3
+            judgmentText = GameConstants.Judgments.perfect
+            judgmentColor = GameConstants.Palette.highScoreColor
             
         case .unReady, .missed:
             break
@@ -1093,7 +1093,7 @@ public class DanceGameManager: NSObject, AVAudioPlayerDelegate, GameHUDSceneDele
         // HUD updates
         hudScene?.updateCombo(0)
         hudScene?.updateCounters(hits: hitNotes, misses: missNotes)
-        hudScene?.showJudgment(text: "MISS", scoreEarned: 0, color: NoteNode.missedColor, at: tapLocation)
+        hudScene?.showJudgment(text: GameConstants.Judgments.miss, scoreEarned: 0, color: GameConstants.Palette.missColor, at: tapLocation)
     }
     
     private func updatePlayerScore(amount: Int) {
@@ -1117,11 +1117,11 @@ public class DanceGameManager: NSObject, AVAudioPlayerDelegate, GameHUDSceneDele
     private func energyMeterFilled() {
         score += energyFillBonus // +500 points
         bonusMeter = 0.0
-        playSFX("GoodNote4")
+        playSFX(GameConstants.Audio.sfxGood4)
         
         hudScene?.updateScore(score)
         hudScene?.updateEnergyMeter(percentage: 0.0)
-        hudScene?.showJudgment(text: "FEVER BONUS!", scoreEarned: energyFillBonus, color: UIColor(red: 1.0, green: 0.3, blue: 0.9, alpha: 1.0))
+        hudScene?.showJudgment(text: GameConstants.Judgments.feverBonus, scoreEarned: energyFillBonus, color: GameConstants.Palette.feverBonusColor)
         
         currentDanceLevel = .playBest
     }

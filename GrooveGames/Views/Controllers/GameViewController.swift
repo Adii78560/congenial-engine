@@ -193,7 +193,7 @@ class GameViewController: UIViewController {
         if localPlayer.isAuthenticated {
             PlayerProfile.shared.setGameCenterAuthenticated(name: localPlayer.displayName)
             self.hudScene?.updateSplashAuthState()
-            self.hudScene?.showJudgment(text: "GAME CENTER: \(localPlayer.displayName.uppercased())", scoreEarned: 0, color: UIColor(red: 0.2, green: 0.9, blue: 1.0, alpha: 1.0))
+            self.hudScene?.showJudgment(text: GameConstants.Judgments.gameCenterPlayer(localPlayer.displayName), scoreEarned: 0, color: GameConstants.Palette.gameCenterCyan)
             self.hudScene?.setScreenState(.mainMenu)
         } else if let vc = gameCenterAuthViewController {
             present(vc, animated: true)
@@ -270,7 +270,7 @@ extension GameViewController: ASAuthorizationControllerDelegate, ASAuthorization
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 PlayerProfile.shared.setAppleAuthenticated(userId: userIdentifier, name: givenName)
-                self.hudScene?.showJudgment(text: "WELCOME, \(givenName.uppercased())!", scoreEarned: 0, color: UIColor(red: 0.2, green: 1.0, blue: 0.5, alpha: 1.0))
+                self.hudScene?.showJudgment(text: GameConstants.Judgments.welcomePlayer(givenName), scoreEarned: 0, color: GameConstants.Palette.successGreenColor)
                 self.hudScene?.setScreenState(.mainMenu)
             }
         }
