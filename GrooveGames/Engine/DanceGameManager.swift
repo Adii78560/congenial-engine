@@ -35,6 +35,7 @@ public class DanceGameManager: NSObject, AVAudioPlayerDelegate, GameHUDSceneDele
     // MARK: - Audio
     private let audioQueue = DispatchQueue(label: "com.groovegames.audio", qos: .userInteractive)
     private var musicPlayer: AVAudioPlayer?
+    private var currentLoadedSong: String?
     private var sfxPlayers: [String: [AVAudioPlayer]] = [:]
     
     // MARK: - CADisplayLink Game Loop
@@ -112,14 +113,12 @@ public class DanceGameManager: NSObject, AVAudioPlayerDelegate, GameHUDSceneDele
     // MARK: - Audio Session & Preloading
     
     private func setupAudioSession() {
-        audioQueue.async {
-            do {
-                let session = AVAudioSession.sharedInstance()
-                try session.setCategory(.playback, mode: .default, options: [.mixWithOthers])
-                try session.setActive(true)
-            } catch {
-                print("[DanceGameManager] Audio session setup error: \(error)")
-            }
+        do {
+            let session = AVAudioSession.sharedInstance()
+            try session.setCategory(.playback, mode: .default, options: [.mixWithOthers])
+            try session.setActive(true)
+        } catch {
+            print("[DanceGameManager] Audio session setup error: \(error)")
         }
     }
     
@@ -159,63 +158,72 @@ public class DanceGameManager: NSObject, AVAudioPlayerDelegate, GameHUDSceneDele
     }
     
     public func loadSong(audioFileName: String, autoPlay: Bool = false) {
+        if currentLoadedSong == audioFileName, let player = musicPlayer {
+            DispatchQueue.main.async {
+                if abs(player.volume - PlayerProfile.shared.musicVolume) > 0.01 {
+                    player.volume = PlayerProfile.shared.musicVolume
+                }
+                if autoPlay {
+                    player.currentTime = 0
+                    player.play()
+                } else if player.isPlaying {
+                    player.stop()
+                    player.currentTime = 0
+                }
+            }
+            return
+        }
+        
         audioQueue.async { [weak self] in
             guard let self = self else { return }
             
-            var newPlayer: AVAudioPlayer?
-            if let songURL = Bundle.main.url(forResource: audioFileName, withExtension: "mp3") {
-                do {
-                    let player = try AVAudioPlayer(contentsOf: songURL)
-                    player.prepareToPlay()
-                    newPlayer = player
-                    print("[DanceGameManager] Loaded song: \(audioFileName).mp3")
-                } catch {
-                    print("[DanceGameManager] Error loading \(audioFileName).mp3: \(error)")
-                }
-            } else {
+            guard let songURL = Bundle.main.url(forResource: audioFileName, withExtension: "mp3") else {
                 print("[DanceGameManager] Could not find \(audioFileName).mp3 in bundle")
+                return
             }
             
-            DispatchQueue.main.async {
-                self.musicPlayer?.stop()
-                newPlayer?.volume = PlayerProfile.shared.musicVolume
-                self.musicPlayer = newPlayer
-                newPlayer?.delegate = self
-                if autoPlay {
-                    newPlayer?.currentTime = 0
-                    newPlayer?.play()
+            do {
+                let player = try AVAudioPlayer(contentsOf: songURL)
+                player.prepareToPlay()
+                
+                DispatchQueue.main.async {
+                    if let old = self.musicPlayer {
+                        old.stop()
+                        old.delegate = nil
+                    }
+                    player.volume = PlayerProfile.shared.musicVolume
+                    player.delegate = self
+                    self.musicPlayer = player
+                    self.currentLoadedSong = audioFileName
+                    print("[DanceGameManager] Loaded song: \(audioFileName).mp3")
+                    
+                    if autoPlay {
+                        player.currentTime = 0
+                        player.play()
+                    }
                 }
+            } catch {
+                print("[DanceGameManager] Error loading \(audioFileName).mp3: \(error)")
             }
         }
     }
     
     private func preloadAudio() {
+        let currentTrack = PlayerProfile.shared.currentSong.audioFileName
+        loadSong(audioFileName: currentTrack, autoPlay: false)
+        
         audioQueue.async { [weak self] in
             guard let self = self else { return }
             
-            // Preload selected song from PlayerProfile
-            let currentTrack = PlayerProfile.shared.currentSong.audioFileName
-            var newPlayer: AVAudioPlayer?
-            if let songURL = Bundle.main.url(forResource: currentTrack, withExtension: "mp3") {
-                do {
-                    let player = try AVAudioPlayer(contentsOf: songURL)
-                    player.prepareToPlay()
-                    newPlayer = player
-                } catch {
-                    print("[DanceGameManager] Error loading \(currentTrack).mp3: \(error)")
-                }
-            } else {
-                print("[DanceGameManager] Could not find \(currentTrack).mp3 in bundle")
-            }
-            
-            // Preload sound effect player pools for zero latency
             let sfxFiles = ["GoodNote1", "GoodNote2", "GoodNote3", "GoodNote4", "BadNote"]
             var poolMap: [String: [AVAudioPlayer]] = [:]
+            let defaultSFXVol = PlayerProfile.shared.sfxVolume
             for name in sfxFiles {
                 if let url = Bundle.main.url(forResource: name, withExtension: "wav") {
                     var pool: [AVAudioPlayer] = []
-                    for _ in 0..<3 { // 3 simultaneous voices per SFX
+                    for _ in 0..<2 { // 2 voices per SFX is lightweight and eliminates audio queue exhaustion
                         if let player = try? AVAudioPlayer(contentsOf: url) {
+                            player.volume = defaultSFXVol
                             player.prepareToPlay()
                             pool.append(player)
                         }
@@ -227,8 +235,6 @@ public class DanceGameManager: NSObject, AVAudioPlayerDelegate, GameHUDSceneDele
             }
             
             DispatchQueue.main.async {
-                self.musicPlayer = newPlayer
-                newPlayer?.delegate = self
                 self.sfxPlayers = poolMap
             }
         }
@@ -240,7 +246,7 @@ public class DanceGameManager: NSObject, AVAudioPlayerDelegate, GameHUDSceneDele
         guard let pool = sfxPlayers[name] else { return }
         for player in pool {
             if !player.isPlaying {
-                player.volume = vol
+                if abs(player.volume - vol) > 0.01 { player.volume = vol }
                 player.currentTime = 0
                 player.play()
                 return
@@ -248,7 +254,7 @@ public class DanceGameManager: NSObject, AVAudioPlayerDelegate, GameHUDSceneDele
         }
         // If all busy, use first
         if let first = pool.first {
-            first.volume = vol
+            if abs(first.volume - vol) > 0.01 { first.volume = vol }
             first.currentTime = 0
             first.play()
         }
