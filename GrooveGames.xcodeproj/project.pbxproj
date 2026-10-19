@@ -27,6 +27,7 @@
 		040FB9A33077A94A008DD6FE /* GrooveGames.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GrooveGames.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		040FB9BC3077A94B008DD6FE /* GrooveGamesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GrooveGamesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		040FB9C63077A94B008DD6FE /* GrooveGamesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GrooveGamesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		999999993077A94A008DD6FE /* GEMINI(Self Modifying).md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "GEMINI(Self Modifying).md"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -85,6 +86,7 @@
 				040FB9A53077A94A008DD6FE /* GrooveGames */,
 				040FB9BF3077A94B008DD6FE /* GrooveGamesTests */,
 				040FB9C93077A94B008DD6FE /* GrooveGamesUITests */,
+				999999993077A94A008DD6FE /* GEMINI(Self Modifying).md */,
 				040FB9A43077A94A008DD6FE /* Products */,
 			);
 			sourceTree = "<group>";
